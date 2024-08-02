@@ -126,6 +126,7 @@ async function reset(choice) {
 }
 
 
+//Add the svg code of chosen graph to html page
 async function setGraph(choice) {
     //inject wanted graph.
     var graphChoice =  '/'+choice+'.svg';
@@ -138,6 +139,8 @@ async function setGraph(choice) {
     }
 }
 
+
+//Maximize a screen in front of the graph
 function freeze(id) {
     //id: id of edge not to freeze//DEBUG
     $("#screen").css({
@@ -148,13 +151,12 @@ function freeze(id) {
 }
 
 
+//
 function clean() {
-
     //TWO PARTS TO THIS FUNCTION:
     //STOP ALL PREVIOUS ACTIONS //debug (not done yet/ undecided)
     //REMOVE SCREEN + RESET COLOURS
-    turbo = false;
-
+    turbo =  false
     //remove screen
     $("#screen").css({
         "height": "0px",
@@ -260,19 +262,8 @@ async function runTurbo() {
     
     let x = edges[Math.floor((Math.random() * edges.length))];
 
-    while (revealEdge(x)) {
-        x = edges[Math.floor((Math.random() * edges.length))];
+    while (turbo && revealEdge(x)) {
         
-        let time = Date.now();
-        let stop = time+3000;
-        console.log(time);//debug
-        console.log(time+3000);//debug
-        for(let i = 0; i < 3000; i++) {
-            console.log(i);
-        }
-        
-
-        console.log("turbo");//debug
     }
     //keep running while user says so or the proof is no longer valid
 
@@ -328,7 +319,7 @@ function permutateColouring() {
 
 }
 
-//calculate confidence in proof
+//calculate confidence in proof and change html value
 function resetConfidence() {
     //m - number of edges
 
@@ -346,5 +337,5 @@ function resetConfidence() {
 }
 
 window.onload = function() {    
-
+    reset('graph2');
   };
