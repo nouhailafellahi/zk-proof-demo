@@ -16,15 +16,12 @@
             font-family: 'Poppins', sans-serif;
         }
         
-        
-
         .edge{
             stroke-width: 18px;
             stroke: rgba(0,1,0,0);
             cursor:pointer;
         
         }
-
         .edge:hover{
             fill:cyan;
             width:5px
@@ -35,26 +32,27 @@
             fill:black;
         }
         
-        .wrapper {
-            stroke: black;
-            stroke-opacity:0;
-            stroke-width: 13px;
-            pointer-events: all;
-            cursor:pointer;
-        }
     </style>
     <div id = "main-wrapper" style = "width: 50%; margin: auto; min-width: min-content">
         
-        <header id = "title" style = "font-size: 40px;">ZK-Proof Reconstruction for Graph 3-Colourability</header>
-        <p id = "description" style = "font-size: 20px; margin-bottom:100px;"> Gonna describe my project using blah blah blah </p>
+        <header id = "title" style = "font-size: 40px;"><b>Zero-Knowledge Proof Reconstruction for Graph 3-Colourability</b></header>
+        <p id = "description" style = "font-size: 17px; margin-bottom:100px;">The concept of a <a href = "https://en.wikipedia.org/wiki/Zero-knowledge_proof" target="_blank" style="color:green">zero-knowledge proof</a> consists of a prover 
+            attempting to convince the verifier that they possess certain information, or that the information they possess meets certain standards, without
+            revealing anything about said information.
+            <br><br>In  the following interplay the application is the prover and you, esteemed audience, are the verifier. The application will attempt to
+            convince you that it possesses a valid 3-colour scheme of either following graph.
+        </p>
 
 
         <div id = "main">
             
             <div id = "first" style = "height: auto; margin-bottom: 100px; width:660px; "> 
                 <h3>Press any edge</h3>
-                <p>Confidence: <b id = "confidence">0</b>%</p>
-                <P>Tries: <b id = "tries">0</b></P>
+                <div style="width:660px; position:relative; margin-bottom:100px" >
+                    <p style = "position:absolute;" >Confidence: <b id = "confidence">0</b>%</p>
+                    <p style = "position: absolute; left:25%">Tries: <b id = "tries">0</b></p>
+                </div>
+                
 
                 
                 <svg id = "graph" width="660" height="590" viewBox="0 0 660 600" fill="none" margin-bottom = 0 xmlns="http://www.w3.org/2000/svg">
@@ -66,12 +64,8 @@
                     <button onclick = "reset('graph1')" >Graph 1</button>
                     <button onclick = "reset('graph2')"> Graph 2 </button>
                     <button id="reveal" onclick = "revealColouring()" style = "position:absolute; left:97%">Reveal</button>
-                    <button id="turbo" onclick = "runTurbo()" style = "position: absolute; left:85%" >Turbo-Run</button>
+                    <button id="turbo" onclick = "runTurbo()" style = "position: absolute; left:84%" >Turbo-Run</button>
                 </div>
-                
-                
-                
-               
                     
             </div>
                 
@@ -79,16 +73,28 @@
             
             
 
-        <div id = "footer" style = "font-size: 17px;">
-            <div id = "details" >
-                This program aims to demonstrate how an interactive zk-proof would be conducted 
-                by utilizing the user as a verifier while the program is a prover.
+        <div id = "footer" style = "font-size: 17px; padding-bottom: 100px">
+            <div id = "details" style="padding-bottom: 40px;">
+                There are a few steps to remember in order to conceptualize the proof.
+                <ol>
+                    Note: the prover hides the colouring from the verifier the entire duration of the two following steps.<br><br>
+                    <li>Prover:   Shuffles the graph colouring (changing the colouring scheme or choosing a different colouring permutation).<br><br></li>
+                    <li>Prover:   Assigns and commits to each node the appropriate colour. Once it is committed, it's impossible to tamper with the chosen colouring.<br><br></li>
+                    <li>Prover:   Presents the verifier with the graph.<br><br></li>
+                    <li>Verifier: Chooses an edge at random.<br><br></li>
+                    <li>Prover:   Reveals the colouring of the two end-point nodes for the chosen edge in front of verifier.<br><br></li>
+                    <li>Verifier: If the colours of the two nodes are the same, then the verifier is 100% certain that the prover does not possess a valid 3-colour scheme for the subject graph and the proving process is over. <br>If the colours of the two nodes are different, however, the verifier is a little more certain that the prover has a valid 3-colour scheme for the subject graph. (The certainty in the prover at each repitition of these steps is represented using the Confidence value at the top of the graph).
+                    The verifier can continue participating in more repititions of this process until they are sufficiently confident that the prover has a valid 3-colour scheme.<br><br></li>  
+                </ol>
+                In this way the verifier will never be able to figure out the colourings that the prover possesses while being able to achieve an infinitely high level of confidence in the prover's claims.<br> This proof hinges on the idea that the more repitions happen without finding similarly coloured nodes, the less likely it is to eventually find two nodes of the same colour (which would invalidate the proof). So the higher the confidence rises, the more willing the verifier is to bet on the assumption that the prover is honest.<br><br>
+           
+                I got to know about zero-knowledge proofs through their use in zk-rollups to increase blockchain scalability, but since then I've come to like them as close friends and highly trusted confidants.
+            
             </div>
 
             <div id = "references">
-                I used these following course notes to guide my logic and 
-                Anya Singh's project to visualize what the proof would look like. 
-
+                I used these <a href = "https://www.cs.cmu.edu/~goyal/s18/15503/scribe_notes/lecture23.pdf" target="_blank" style="color:green">course notes</a> to guide my logic and <a href = "https://web.mit.edu/~ezyang/Public/graph/svg.html" target="_blank" style="color:green">Edward Z. Yang's demo</a> to help me visualize what the application could look like.
+                And last but not least an honourable mention to a few trusty StackOverflow posts.
             </div>
         
         </div>

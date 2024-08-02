@@ -1,2 +1,3 @@
-# zk-proof-demo
-Demonstration of zero-knowledge proof process on graph 3-colourability
+A visual demonstration of zero-knowledge proofs used for graph 3-colourability. This application proves the possession of 
+3-colour scheme for select graphs without revealing said colouring scheme.
+

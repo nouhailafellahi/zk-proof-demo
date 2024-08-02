@@ -1,0 +1,33 @@
+    <!--Rectangle Edges-->
+    <rect id = "AB" class = "edge" x="315" y="32.8914" width="2" height="340" transform="rotate(-46.2896 315 32.8914)" fill="black"/>
+    <rect id = "BC" class = "edge" x="557.57" y="255" width="2" height="302" transform="rotate(25.6169 557.57 255)" fill="black"/>
+    <rect id = "CD" class = "edge" x="188" y="530" width="2" height="235" transform="rotate(-90 188 530)" fill="black"/>
+    <rect id = "DE" class = "edge" width="2" height="302" transform="matrix(-0.901705 0.432351 0.432351 0.901705 62.6068 258)" fill="black"/>
+    <rect id = "AE" class = "edge" width="2" height="340" transform="matrix(-0.691013 -0.722842 -0.722842 0.691013 311.53 29.8914)" fill="black"/>
+    <rect id = "BG" class = "edge" width="2" height="131" transform="matrix(0 -1 -1 0 561 264)" fill="black"/>
+    <rect id = "CH" class = "edge" width="2" height="107.321" transform="matrix(0.956178 -0.292785 -0.292785 -0.956178 423.42 532.789)" fill="black"/>
+    <rect id = "DI" class = "edge" x="195.82" y="532.789" width="2" height="107.321" transform="rotate(-162.975 195.82 532.789)" fill="black"/>
+    <rect id = "EJ" class = "edge" width="2" height="131" transform="matrix(0 -1 -1 0 193 264)" fill="black"/>
+    <rect id = "AF" class = "edge" width="2" height="131" transform="matrix(1 0 0 -1 310 151)" fill="black"/>
+    <rect id = "FH" class = "edge" x="310" y="157.114" width="2" height="292" transform="rotate(-16.1771 310 157.114)" fill="black"/>
+    <rect id = "HJ" class = "edge" width="2" height="261" transform="matrix(-0.638123 0.769935 0.769935 0.638123 195.552 268)" fill="black"/>
+    <rect id = "GJ" class = "edge" width="2" height="235" transform="matrix(0 1 1 0 198 260)" fill="black"/>
+    <rect id = "GI" class = "edge" x="425.953" y="265" width="2" height="261" transform="rotate(50.348 425.953 265)" fill="black"/>
+    <rect id = "FI" class = "edge" width="2" height="292" transform="matrix(-0.960405 -0.278608 -0.278608 0.960405 310.195 159.114)" fill="black"/>
+    
+    <!--Nodes-->
+    <circle id = "A" class = "node" cx="311.5" cy="28.5" r="15"/>
+    <circle id = "B" class = "node" cx="557.5" cy="262.5" r="15"/>
+    <circle id = "C" class = "node" cx="426.5" cy="526.5" r="15"/>
+    <circle id = "D" class = "node" cx="192.5" cy="526.5" r="15"/>
+    <circle id = "E" class = "node" cx="61.5" cy="262.5" r="15"/>
+    <circle id = "F" class = "node" cx="311.5" cy="151.5" r="15"/>
+    <circle id = "G" class = "node" cx="426.5" cy="262.5" r="15"/>
+    <circle id = "H" class = "node" cx="391.5" cy="431.5" r="15"/>
+    <circle id = "I" class = "node" cx="227.5" cy="431.5" r="15"/>
+    <circle id = "J" class = "node" cx="192.5" cy="262.5" r="15"/>
+    
+    <!--Screen-->
+    <rect id = "screen" x = "0" y = "0" rx = "1" ry = "1" width = "0" height = "0" fill = "rgba(0,0,1,0)" style = "cursor:pointer;"></rect>
+
+                
