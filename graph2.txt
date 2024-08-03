@@ -22,18 +22,18 @@
     <rect id = "DJ" class = "edge" x="616" y="262" width="2" height="579" transform="rotate(90 616 262)" fill="black"/>
     
     <!--Nodes-->
-    <circle id = "A" class = "node" cx="322.5" cy="98.5" r="15"/>
-    <circle id = "B" class = "node" cx="493.5" cy="63.5" r="15"/>
-    <circle id = "C" class = "node" cx="493.5" cy="194.5" r="15"/>
-    <circle id = "D" class = "node" cx="615.5" cy="263.5" r="15"/>
-    <circle id = "E" class = "node" cx="493.5" cy="327.5" r="15"/>
-    <circle id = "F" class = "node" cx="493.5" cy="460.5" r="15"/>
-    <circle id = "G" class = "node" cx="322.5" cy="374.5" r="15"/>
-    <circle id = "H" class = "node" cx="163.5" cy="460.5" r="15"/>
-    <circle id = "I" class = "node" cx="163.5" cy="327.5" r="15"/>
-    <circle id = "J" class = "node" cx="40.5" cy="263.5" r="15"/>
-    <circle id = "K" class = "node" cx="163.5" cy="194.5" r="15"/>
-    <circle id = "L" class = "node" cx="163.5" cy="63.5" r="15"/>
+    <circle id = "A" class = "node" cx="323" cy="99" r="15"/>
+    <circle id = "B" class = "node" cx="494" cy="64" r="15"/>
+    <circle id = "C" class = "node" cx="494" cy="195" r="15"/>
+    <circle id = "D" class = "node" cx="616" cy="264" r="15"/>
+    <circle id = "E" class = "node" cx="494" cy="328" r="15"/>
+    <circle id = "F" class = "node" cx="494" cy="461" r="15"/>
+    <circle id = "G" class = "node" cx="323" cy="375" r="15"/>
+    <circle id = "H" class = "node" cx="164" cy="461" r="15"/>
+    <circle id = "I" class = "node" cx="164" cy="328" r="15"/>
+    <circle id = "J" class = "node" cx="41" cy="264" r="15"/>
+    <circle id = "K" class = "node" cx="164" cy="195" r="15"/>
+    <circle id = "L" class = "node" cx="164" cy="64" r="15"/>
     
     <!--Screen-->
     <rect id = "screen" x = "0" y = "0" rx = "1" ry = "1" width = "0" height = "0" fill = "rgba(0,0,1,0)" style = "cursor:pointer;"></rect>

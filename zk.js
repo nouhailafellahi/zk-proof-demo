@@ -3,12 +3,46 @@ let turbo = false;
 let tries = 0;
 let confidence = 0;
 
+
+
+
+
 //list of edges for both graphs
 const E1 = ["AB", "BC", "CD", "DE", "AE", "BG", "CH", "DI", "EJ", "AF", "FH", "HJ", "GJ", "GI", "FI"];
 const E2 = ["AB", "BC", "CD", "DE", "EF", "FG", "GH", "HI", "IJ", "JK", "KL", "AL", "AC", "CE", "EG", "GI", "IK", "AK", "BH", "FL", "DJ"];
 
-//store node colouring
+
+//store node locations 
 const N1 = {
+    "A":[312,  29],
+    "B":[558, 263],
+    "C":[427, 527],
+    "D":[193, 527],
+    "E":[62,  263],
+    "F":[312, 152],
+    "G":[427, 263],
+    "H":[392, 432],
+    "I":[228, 432],
+    "J":[193, 263]
+}
+
+const N2 = {
+    'A': [],
+    'B': [],
+    'C': [],
+    'D': [],
+    'E': [],
+    'F': [],
+    'G': [],
+    'H': [],
+    'I': [],
+    'J': [],
+    'K': [],
+    'L': []
+}
+
+//store node colouring
+const G1 = {
     "A":"one",
     "B":"two",
     "C":"three",
@@ -21,23 +55,7 @@ const N1 = {
     "J":"three"
 };
 
-var N3 = {
-    'A': ["one", "three","two","one"],
-    'B': ["two","three","two","one"],
-    'C': ["three","one","three","two"],
-    'D': ["two","two","one","three"],
-    'E': ["one","three","three","one"],
-    'F': ["one","two","one","three"],
-    'G': ["three","one","two","two"],
-    'H': ["two","one","one","one"],
-    'I': ["one","one","two","two"],
-    'J': ["two","three","one","one"],
-    'K': ["one","two","three","three"],
-    'L': ["three","two","three","three"],
-}
-
-
-var N2 = {
+var G2 = {
     'A': ["two",   "one",   "two",   "two"   ],
     'B': ["three", "two",   "three",   "one"   ],
     'C': ["one",   "three", "one",   "two"   ],
@@ -67,17 +85,17 @@ async function reset(choice) {
     turbo = false;
     tries = 0;
     $("#tries").html("0");
-    resetConfidence();
+    resetConfidence(tries);
 
     //assign graph-specific node structure
     if (choice === "graph1") {
-        graph = structuredClone(N1);
+        graph = structuredClone(G1);
     } else if (choice === "graph2") {
         //assign graph 2
         const x = Math.floor((Math.random() * 4));
-        let keys = Object.keys(N2);
-        for (var key in N2){
-            graph[key] = N2[key][x];
+        let keys = Object.keys(G2);
+        for (var key in G2){
+            graph[key] = G2[key][x];
         }
 
     }
@@ -240,10 +258,10 @@ function permutateColouring() {
         //choose a different colouring scheme (not needed for graph1 since it only has one colouring scheme)
         const arr = [0,0,0,1,1,1,2,2,2,3];
         const x = arr[Math.floor(Math.random()*arr.length)];
-        let keys = Object.keys(N2);
+        let keys = Object.keys(G2);
         for (let key = 0; key < keys.length; key++){
             const i = keys[key];
-            graph[i] = N2[i][x];
+            graph[i] = G2[i][x];
         }
     }
 

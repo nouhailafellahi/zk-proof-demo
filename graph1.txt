@@ -16,16 +16,17 @@
     <rect id = "FI" class = "edge" width="2" height="292" transform="matrix(-0.960405 -0.278608 -0.278608 0.960405 310.195 159.114)" fill="black"/>
     
     <!--Nodes-->
-    <circle id = "A" class = "node" cx="311.5" cy="28.5" r="15"/>
-    <circle id = "B" class = "node" cx="557.5" cy="262.5" r="15"/>
-    <circle id = "C" class = "node" cx="426.5" cy="526.5" r="15"/>
-    <circle id = "D" class = "node" cx="192.5" cy="526.5" r="15"/>
-    <circle id = "E" class = "node" cx="61.5" cy="262.5" r="15"/>
-    <circle id = "F" class = "node" cx="311.5" cy="151.5" r="15"/>
-    <circle id = "G" class = "node" cx="426.5" cy="262.5" r="15"/>
-    <circle id = "H" class = "node" cx="391.5" cy="431.5" r="15"/>
-    <circle id = "I" class = "node" cx="227.5" cy="431.5" r="15"/>
-    <circle id = "J" class = "node" cx="192.5" cy="262.5" r="15"/>
+    <circle id = "A" class = "node" cx="312" cy="29" r="15"/>
+    <circle id = "B" class = "node" cx="558" cy="263" r="15"/>
+    <circle id = "C" class = "node" cx="427" cy="527" r="15"/>
+    <circle id = "D" class = "node" cx="193" cy="527" r="15"/>
+    <circle id = "E" class = "node" cx="62" cy="263" r="15"/>
+    <circle id = "F" class = "node" cx="312" cy="152" r="15"/>
+    <circle id = "G" class = "node" cx="427" cy="263" r="15"/>
+    <circle id = "H" class = "node" cx="392" cy="432" r="15"/>
+    <circle id = "I" class = "node" cx="228" cy="432" r="15"/>
+    <circle id = "J" class = "node" cx="193" cy="263" r="15"/>
+
     
     <!--Screen-->
     <rect id = "screen" x = "0" y = "0" rx = "1" ry = "1" width = "0" height = "0" fill = "rgba(0,0,1,0)" style = "cursor:pointer;"></rect>
