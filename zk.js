@@ -114,7 +114,7 @@ async function reset(choice) {
 //Add the svg code of chosen graph to html page
 async function setGraph(choice) {
     //inject wanted graph.
-    var graphChoice =  '/'+choice+'.svg';
+    var graphChoice =  '/'+choice+'.txt';
     try {
         const response = await fetch(graphChoice);        
         const text = await response.text();
