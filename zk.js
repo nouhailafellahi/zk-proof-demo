@@ -179,13 +179,19 @@ function revealEdge(id) {
 
 //choose a random coloring scheme+permutation and commit it. 
 function permutateColoring() {
-    //the permutations array would probably look better utilizing numbers instead of the color string, 
-    //then later assigning a color to each number in the permutation (debug)
-    const permutations  = [["DarkSalmon", "DarkMagenta", "DarkSeaGreen"], ["DarkSalmon", "DarkSeaGreen", "DarkMagenta"], ["DarkMagenta", "DarkSalmon", "DarkSeaGreen"], ["DarkMagenta", "DarkSeaGreen", "DarkSalmon"], ["DarkSeaGreen", "DarkSalmon", "DarkMagenta"], ["DarkSeaGreen", "DarkMagenta", "DarkSalmon"]];
+
+    const permutations  = [
+        ["DarkSalmon", "DarkMagenta", "DarkSeaGreen"], 
+        ["DarkSalmon", "DarkSeaGreen", "DarkMagenta"], 
+        ["DarkMagenta", "DarkSalmon", "DarkSeaGreen"], 
+        ["DarkMagenta", "DarkSeaGreen", "DarkSalmon"], 
+        ["DarkSeaGreen", "DarkSalmon", "DarkMagenta"], 
+        ["DarkSeaGreen", "DarkMagenta", "DarkSalmon"]
+    ];
+
     const permutation = permutations[Math.floor((Math.random() * 6))];
     
-    //the following if-statement could be avoided by using a global variable to keep track of which graph is current (debug)
-    
+    //the following if-statement could be avoided by using a global variable to keep track of which graph is current
     //identify the current graph (if more than 10 nodes, it is the second graph)
     if (Object.keys(graph).length > 10) {
         //choose a different coloring scheme (not needed for graph1 since it only has one coloring scheme)
@@ -272,7 +278,7 @@ async function runTurbo() {
 //Add the svg code of chosen graph to html page
 async function setGraph(choice) {
     //inject wanted graph.
-    var graphChoice =  './'+choice+'.svg';
+    var graphChoice =  './graphs/'+choice+'.svg';
     try {
         const response = await fetch(graphChoice);        
         const text = await response.text();
@@ -313,7 +319,7 @@ function resetConfidence(n) {
 
     //if the user has picked one or more edges, adjust the confidence level accordingly
     if (n != 0) {
-        //will add an explanation for the f ollowing function once I understand it myself L.O.L. (debug)
+        //calculate confidence
         confidence = (100* (1 - (Math.pow((1 - 1/m), n)))); 
     } else {
         confidence = 0;
