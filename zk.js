@@ -4,44 +4,11 @@ let tries = 0;
 let confidence = 0;
 
 
-
-
-
 //list of edges for both graphs
 const E1 = ["AB", "BC", "CD", "DE", "AE", "BG", "CH", "DI", "EJ", "AF", "FH", "HJ", "GJ", "GI", "FI"];
 const E2 = ["AB", "BC", "CD", "DE", "EF", "FG", "GH", "HI", "IJ", "JK", "KL", "AL", "AC", "CE", "EG", "GI", "IK", "AK", "BH", "FL", "DJ"];
 
-
-//store node locations 
-const N1 = {
-    "A":[312,  29],
-    "B":[558, 263],
-    "C":[427, 527],
-    "D":[193, 527],
-    "E":[62,  263],
-    "F":[312, 152],
-    "G":[427, 263],
-    "H":[392, 432],
-    "I":[228, 432],
-    "J":[193, 263]
-}
-
-const N2 = {
-    'A': [],
-    'B': [],
-    'C': [],
-    'D': [],
-    'E': [],
-    'F': [],
-    'G': [],
-    'H': [],
-    'I': [],
-    'J': [],
-    'K': [],
-    'L': []
-}
-
-//store node colouring
+//store node coloring
 const G1 = {
     "A":"one",
     "B":"two",
@@ -75,20 +42,24 @@ var G2 = {
 var graph = {
 
 }
-//current node colouring
-var colouring = {
+//current node coloring
+var coloring = {
 
 }
 
+
 //initialize html and js states for chosen graph
 async function reset(choice) {
-    turbo = false;
+    stopTurbo();
+
+    //reset confidence and tries count
     tries = 0;
     $("#tries").html("0");
     resetConfidence(tries);
 
     //assign graph-specific node structure
     if (choice === "graph1") {
+        //assign graph 1
         graph = structuredClone(G1);
     } else if (choice === "graph2") {
         //assign graph 2
@@ -106,22 +77,8 @@ async function reset(choice) {
     //set edge behaviour
     $(".edge").attr("onclick", "revealEdge(this.id)");
     
-    //set colours
+    //reset colors
     clean();
-}
-
-
-//Add the svg code of chosen graph to html page
-async function setGraph(choice) {
-    //inject wanted graph.
-    var graphChoice =  './'+choice+'.txt';
-    try {
-        const response = await fetch(graphChoice);        
-        const text = await response.text();
-        $("#graph").html(text);
-    } catch(error) {
-        console.error('Error fetching the file:', error);
-    }
 }
 
 
@@ -132,14 +89,15 @@ function freeze() {
          "width": "660px",
          "height": "600px",
     }); 
+
     $("#screen").attr("onclick", "clean()");
 }
 
 
-//Hide graph colouring & remove screen
+//Hide graph coloring & remove screen
 function clean() {
-    //STOP ALL PREVIOUS ACTIONS //debug (not done yet/ undecided)
-
+    //if the confidence had been set to 0 in a previous round, reset # of tries
+    //this means the proof was invalidated with similarly colored neighboring nodes
     if (confidence == 0) {
         tries = 0;
         $('#tries').html(tries);
@@ -161,93 +119,68 @@ function clean() {
     });
 
     //reset button functions
-    $("#reveal").attr("onclick", "revealColouring()");
+    $("#reveal").attr("onclick", "revealColoring()");
     $("#reveal").html("Reveal");
 
-    colouring = {}
+    //reset coloring scheme
+    coloring = {}
 }
-
-
-//reveal the currently chosen colouring of the graph.
-function revealColouring() {
-    $("#reveal").attr("onclick", "clean()");
-    $("#reveal").html("Reset");
-    freeze();
-
-    //if a previous colouring is not already chosen, choose a new one.
-    if(Object.keys(colouring).length == 0){
-        permutateColouring()
-    }
-
-    console.log(colouring);//debug
-
-    var keys = Object.keys(colouring);
-    //iterate through current nodes
-    for (let key = 0; key < keys.length; key++) {
-        //reveal colouring for current node.
-        const i = keys[key];
-        var node = "#"+i;
-        $(node).attr("fill", colouring[i]);
-    }
-
-}
-
-
 
 /* 
-    SIDENOTE: The colouring should be chosen before the user has made a choice. But since a new colouring 
-    is chosen every time a user makes a choice, it is not *technically* wrong to choose colouring 
-    once the user picks an edge. The way in which the colouring is chosen has nothing to do with 
+    SIDENOTE: The coloring should be chosen before the user has made a choice. But since a new coloring 
+    is chosen every time a user makes a choice, it is not *technically* wrong to choose coloring 
+    once the user picks an edge since the way in which the coloring is chosen has nothing to do with 
     edge is chosen anyway. 
-    I will decide whether this is acceptable or not once I possess the faculties to do so. (debug)
+    
 */
 
-//when the user has picked an edge, a colouring scheme/permutation 
+//when the user has picked an edge, a coloring scheme/permutation 
 function revealEdge(id) {
     //get rid of previously chosen edges showing on the screen
     clean();
+    //freeze the screen
     freeze();
+
     tries++;
+    $("#tries").html(tries);
     resetConfidence(tries);
 
-    //choose new colouring scheme and/or permutation
-    permutateColouring();
+    //choose new coloring scheme and/or permutation
+    permutateColoring();
 
-    //reveal colouring for edge endpoints
+    //reveal coloring for edge endpoints
     let node1 = id.substr(0,1);
     let node2 = id.substr(1,1);
 
-    $('#'+node1).attr("fill", colouring[node1]);
-    $('#'+node2).attr("fill", colouring[node2]);
+    $('#'+node1).attr("fill", coloring[node1]);
+    $('#'+node2).attr("fill", coloring[node2]);
 
-    let colour = "gold";
+    let edgeColor = "gold";
 
     //In case the mathematical proof has failed: deviate and perform the following
-    let valid = true;
-    if(colouring[node1] == colouring[node2]){
-        colour = "red";
-        valid = false;
+    if(coloring[node1] == coloring[node2]){
+        edgeColor = "red";
         resetConfidence(0);
-        //Once the turbo functionality is implemented, it will be temporarily stopped here. (debug)
+        stopTurbo();
     }
-    $("#tries").html(tries);
     
-
-    //assign appropriate colour for chosen edge
+    //assign appropriate color for chosen edge
     $('#'+id).attr({
-        "fill": colour,
+        "fill": edgeColor,
         "width": "4"
     });
 
+    if (turbo == true) {
+        //cannot allow to clean() when running turbo
+        $("#screen").attr("onclick", "");
+    }
 
-    //status for chosen edge (faulty vs. advance the proof)
-    return valid;
 }
 
-//choose a random colouring scheme+permutation and commit it. 
-function permutateColouring() {
-    //the permutations array would probably look better utilizing numbers instead of the colour string, 
-    //then later assigning a colour to each number in the permutation (debug)
+//choose a random coloring scheme+permutation and commit it. 
+function permutateColoring() {
+    //the permutations array would probably look better utilizing numbers instead of the color string, 
+    //then later assigning a color to each number in the permutation (debug)
     const permutations  = [["DarkSalmon", "DarkMagenta", "DarkSeaGreen"], ["DarkSalmon", "DarkSeaGreen", "DarkMagenta"], ["DarkMagenta", "DarkSalmon", "DarkSeaGreen"], ["DarkMagenta", "DarkSeaGreen", "DarkSalmon"], ["DarkSeaGreen", "DarkSalmon", "DarkMagenta"], ["DarkSeaGreen", "DarkMagenta", "DarkSalmon"]];
     const permutation = permutations[Math.floor((Math.random() * 6))];
     
@@ -255,7 +188,7 @@ function permutateColouring() {
     
     //identify the current graph (if more than 10 nodes, it is the second graph)
     if (Object.keys(graph).length > 10) {
-        //choose a different colouring scheme (not needed for graph1 since it only has one colouring scheme)
+        //choose a different coloring scheme (not needed for graph1 since it only has one coloring scheme)
         const arr = [0,0,0,1,1,1,2,2,2,3];
         const x = arr[Math.floor(Math.random()*arr.length)];
         let keys = Object.keys(G2);
@@ -267,26 +200,107 @@ function permutateColouring() {
 
     /*
       SIDENOTE: as opposed to how it is specified in the mathematical proofs,
-      this program does not use complex mechanisms to commit the colouring scheme/permutation
+      this program does not use complex mechanisms to commit the coloring scheme/permutation
       it is assumed that, within the scope of the html code and by looking at how the js code 
-      is structured, there is no tampering with the colouring once it is chosen. 
+      is structured, there is no tampering with the coloring once it is chosen. 
 
       *this may be subject to modifications later on*
     */
 
-    //commit colouring to the variable colouring using the variable graph
+    //commit coloring to the variable coloring using the variable graph
     var keys  = Object.keys(graph);
     for (let key = 0; key < keys.length; key++) {
         const i = keys[key];
         
         if (graph[i] == "one") {
-            colouring[i] = permutation[0];
+            coloring[i] = permutation[0];
         } else if (graph[i] == "two") {
-            colouring[i] = permutation[1];
+            coloring[i] = permutation[1];
         } else if(graph[i] == "three") {
-            colouring[i] = permutation[2];
+            coloring[i] = permutation[2];
         }
 
+    }
+
+}
+
+//stop turbo run and set all functionalities back to normal.
+function stopTurbo() {
+    turbo = false;
+
+    //re-enable applicable buttons/operations.
+    $('#reveal').prop('disabled', false);
+    $("#turbo").attr('onclick', 'runTurbo()');
+    $("#turbo").html('Turbo-Run');
+    $("#screen").attr("onclick", "clean()");
+
+}
+
+
+//constantly pick random edges, separated by a chosen time interval, until the user prompts it to stop
+async function runTurbo() {
+    //disable buttons / applicable previous operations
+    $('#reveal').prop('disabled', true);
+    $("#turbo").attr('onclick', 'stopTurbo()');
+    $("#turbo").html('Stop Turbo');
+
+    turbo = true;
+
+    //delay program flow by ms milliseconds.
+    function delay(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    //set which array of edges to choose from
+    let edges = E1;
+    //if there are more than 10, nodes, we know that it's graph2
+    if (Object.keys(graph).length > 10) {
+        edges = E2; 
+    }
+    
+    //reveal random edges as long as the app is in turbo mode
+    while (turbo == true) {
+        let x = edges[Math.floor((Math.random() * edges.length))];
+        revealEdge(x);
+        await delay(200);
+    }
+    
+}
+
+
+
+//Add the svg code of chosen graph to html page
+async function setGraph(choice) {
+    //inject wanted graph.
+    var graphChoice =  './'+choice+'.svg';
+    try {
+        const response = await fetch(graphChoice);        
+        const text = await response.text();
+        $("#graph").html(text);
+    } catch(error) {
+        console.error('Error fetching the file:', error);
+    }
+}
+
+
+//reveal the currently chosen coloring of the graph.
+function revealColoring() {
+    $("#reveal").attr("onclick", "clean()");
+    $("#reveal").html("Reset");
+    freeze();
+
+    //if a previous coloring is not already chosen, choose a new one.
+    if(Object.keys(coloring).length == 0){
+        permutateColoring()
+    }
+
+    var keys = Object.keys(coloring);
+    //iterate through current nodes
+    for (let key = 0; key < keys.length; key++) {
+        //reveal coloring for current node.
+        const i = keys[key];
+        var node = "#"+i;
+        $(node).attr("fill", coloring[i]);
     }
 
 }
@@ -308,27 +322,3 @@ function resetConfidence(n) {
     //adjust html value
     $("#confidence").html(Math.floor(confidence*100)/100);
 }
-
-
-//constantly pick random edges, separated by a chosen time interval, until the user prompts it to stop
-async function runTurbo() {
-    //for now, this function picks a random edge to reveal, just as any user would
-    //the purpose of it, however, it to constantly pick random edges, separated by a chosen
-    //time interval until the user prompts it to stop. (debug)
-    turbo = true;
-
-    let edges = E1;
-    //if there are more than 10, nodes, we know that it's graph2
-    if (Object.keys(graph).length > 10) {
-        edges = E2; 
-    }
-    
-    let x = edges[Math.floor((Math.random() * edges.length))];
-    revealEdge(x);
-}
-
-
-window.onload = function() {  
-    //for testing purposes (debug)  
-    console.log()
-  };

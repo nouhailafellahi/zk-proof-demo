@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zero-Knowledge Proof Reconstruction for Graph 3-Colourability</title>
+    <title>Zero-Knowledge Proof Reconstruction for Graph 3-colorability</title>
 </head>
 <body >
     <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
@@ -35,12 +35,12 @@
     </style>
     <div id = "main-wrapper" style = "width: 50%; margin: auto; min-width: min-content">
         
-        <header id = "title" style = "font-size: 40px;"><b>Zero-Knowledge Proof Reconstruction for Graph 3-Colourability</b></header>
+        <header id = "title" style = "font-size: 40px;"><b>Zero-Knowledge Proof Reconstruction for Graph 3-colorability</b></header>
         <p id = "description" style = "font-size: 17px; margin-bottom:100px;">The concept of a <a href = "https://en.wikipedia.org/wiki/Zero-knowledge_proof" target="_blank" style="color:green">zero-knowledge proof</a> consists of a prover 
             attempting to convince the verifier that they possess certain information, or that the information they possess meets certain standards, without
             revealing anything about said information.
             <br><br>In  the following interplay the application is the prover and you, esteemed audience, are the verifier. The application will attempt to
-            convince you that it possesses a valid 3-colour scheme of either following graph.
+            convince you that it possesses a valid 3-color scheme of either following graph.
         </p>
 
 
@@ -63,7 +63,7 @@
                 <div style="width:660px; position:relative">
                     <button onclick = "reset('graph1')" >Graph 1</button>
                     <button onclick = "reset('graph2')"> Graph 2 </button>
-                    <button id="reveal" onclick = "revealColouring()" style = "position:absolute; left:97%">Reveal</button>
+                    <button id="reveal" onclick = "revealColoring()" style = "position:absolute; left:97%">Reveal</button>
                     <button id="turbo" onclick = "runTurbo()" style = "position: absolute; left:84%" >Turbo-Run</button>
                 </div>
                     
@@ -77,16 +77,16 @@
             <div id = "details" style="padding-bottom: 40px;">
                 There are a few steps to remember in order to conceptualize the proof.
                 <ol>
-                    Note: the prover hides the colouring from the verifier the entire duration of the two following steps.<br><br>
-                    <li>Prover:   Shuffles the graph colouring (changing the colouring scheme or choosing a different colouring permutation).<br><br></li>
-                    <li>Prover:   Assigns and commits to each node the appropriate colour. Once it is committed, it's impossible to tamper with the chosen colouring.<br><br></li>
+                    Note: the prover hides the coloring from the verifier the entire duration of the two following steps.<br><br>
+                    <li>Prover:   Shuffles the graph coloring (changing the coloring scheme or choosing a different coloring permutation).<br><br></li>
+                    <li>Prover:   Assigns and commits to each node the appropriate color. Once it is committed, it's impossible to tamper with the chosen coloring.<br><br></li>
                     <li>Prover:   Presents the verifier with the graph.<br><br></li>
                     <li>Verifier: Chooses an edge at random.<br><br></li>
-                    <li>Prover:   Reveals the colouring of the two end-point nodes for the chosen edge in front of verifier.<br><br></li>
-                    <li>Verifier: If the colours of the two nodes are the same, then the verifier is 100% certain that the prover does not possess a valid 3-colour scheme for the subject graph and the proving process is over. <br>If the colours of the two nodes are different, however, the verifier is a little more certain that the prover has a valid 3-colour scheme for the subject graph. (The certainty in the prover at each repitition of these steps is represented using the Confidence value at the top of the graph).
-                    The verifier can continue participating in more repititions of this process until they are sufficiently confident that the prover has a valid 3-colour scheme.<br><br></li>  
+                    <li>Prover:   Reveals the coloring of the two end-point nodes for the chosen edge in front of the verifier.<br><br></li>
+                    <li>Verifier: If the colors of the two nodes are the same, then the verifier is 100% certain that the prover does not possess a valid 3-color scheme for the subject graph and the proving process is over. <br> If the colors of the two nodes are different, however, the verifier is a little more certain that the prover has a valid 3-color scheme for the subject graph. (The certainty in the prover at each repetition of these steps is represented using the Confidence value at the top of the graph).
+                    The verifier can continue participating in more repetitions of this process until they are sufficiently confident that the prover has a valid 3-color scheme.<br><br></li>  
                 </ol>
-                In this way the verifier will never be able to figure out the colourings that the prover possesses while being able to achieve an infinitely high level of confidence in the prover's claims.<br> This proof hinges on the idea that the more repitions happen without finding similarly coloured nodes, the less likely it is to eventually find two nodes of the same colour (which would invalidate the proof). So the higher the confidence rises, the more willing the verifier is to bet on the assumption that the prover is honest.<br><br>
+                In this way the verifier will never be able to figure out the colorings that the prover possesses while being able to achieve an infinitely high level of confidence in the prover's claims.<br> This proof hinges on the idea that the more repetitions happen without finding similarly colored nodes, the less likely it is to eventually find two nodes of the same color (which would invalidate the proof). So the higher the confidence rises, the more willing the verifier is to bet on the assumption that the prover is honest.<br><br>
            
                 I got to know about zero-knowledge proofs through their use in zk-rollups to increase blockchain scalability, but since then I've come to like them as close friends and highly trusted confidants.
             
