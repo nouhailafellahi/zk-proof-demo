@@ -27,7 +27,6 @@
     <circle id = "I" class = "node" cx="228" cy="432" r="15"/>
     <circle id = "J" class = "node" cx="193" cy="263" r="15"/>
 
-    
     <!--Screen-->
     <rect id = "screen" x = "0" y = "0" rx = "1" ry = "1" width = "0" height = "0" fill = "rgba(0,0,1,0)" style = "cursor:pointer;"></rect>
 
