@@ -146,7 +146,7 @@ function revealEdge(id) {
     resetConfidence(tries);
 
     //choose new coloring scheme and/or permutation
-    permutateColoring();
+    permuteColoring();
 
     //reveal coloring for edge endpoints
     let node1 = id.substr(0,1);
@@ -178,7 +178,7 @@ function revealEdge(id) {
 }
 
 //choose a random coloring scheme+permutation and commit it. 
-function permutateColoring() {
+function permuteColoring() {
 
     const permutations  = [
         ["DarkSalmon", "DarkMagenta", "DarkSeaGreen"], 
@@ -297,7 +297,7 @@ function revealColoring() {
 
     //if a previous coloring is not already chosen, choose a new one.
     if(Object.keys(coloring).length == 0){
-        permutateColoring()
+        permuteColoring()
     }
 
     var keys = Object.keys(coloring);

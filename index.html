@@ -36,25 +36,25 @@
     <div id = "main-wrapper" style = "width: 50%; margin: auto; min-width: min-content">
         
         <header id = "title" style = "font-size: 40px;"><b>Zero-Knowledge Proof Reconstruction for Graph 3-colorability</b></header>
-        <p id = "description" style = "font-size: 17px; margin-bottom:80px;">The concept of a <a href = "https://en.wikipedia.org/wiki/Zero-knowledge_proof" target="_blank" style="color:pink">zero-knowledge proof</a> consists of a prover 
+        <p id = "description" style = "font-size: 15px; margin-bottom:40px;">
+            <a href = "https://github.com/nouhailafellahi/zk-proof-demo" target="_blank" style="color:purple"><b>GitHub Repository</b></a>
+            <br><br>I have included an in-depth description and explanation of the application here: <a href = "https://nouhailafellahi.notion.site/Zero-Knowledge-Proof-Reconstruction-for-Graph-3-Colourability-d5a8ee8cf7624beeb9da9753e64c0a7e" target = "_blank" style="color:purple"><b>Zero-Knowledge Proof Reconstruction for Graph 3-Colourability</b></a>
+            <br><br>The concept of a <a href = "https://en.wikipedia.org/wiki/Zero-knowledge_proof" target="_blank" style="color:green">zero-knowledge proof</a> consists of a prover 
             attempting to convince the verifier that they possess certain information, or that the information they possess meets certain standards, without
             revealing anything about said information.
             <br><br>In  the following interplay the application is the prover and you, esteemed audience, are the verifier. The application will attempt to
-            convince you that it possesses a valid 3-color scheme of either following graph.
-            <br><br><br>I have included an in-depth description and explanation of the application here: <a href = "https://nouhailafellahi.notion.site/Zero-Knowledge-Proof-Reconstruction-for-Graph-3-Colourability-d5a8ee8cf7624beeb9da9753e64c0a7e" target = "_blank" style="color:pink"><b>Zero-Knowledge Proof Reconstruction for Graph 3-Colourability</b></a>
+            convince you that it possesses a valid 3-color scheme for either following graph.
+            
         </p>
 
 
-        <div id = "main">
-            
+        <div id = "main"> 
             <div id = "first" style = "height: auto; margin-bottom: 100px; width:660px; "> 
                 <h3>Press any edge</h3>
                 <div style="width:660px; position:relative; margin-bottom:100px" >
                     <p style = "position:absolute;" >Confidence: <b id = "confidence">0</b>%</p>
                     <p style = "position: absolute; left:25%">Tries: <b id = "tries">0</b></p>
                 </div>
-                
-
                 
                 <svg id = "graph" width="660" height="590" viewBox="0 0 660 600" fill="none" margin-bottom = 0 xmlns="http://www.w3.org/2000/svg">
                     <text fill = "black" x = 110 y=300 font-size = 25>Choose a graph</text>
@@ -66,15 +66,11 @@
                     <button onclick = "reset('graph2')"> Graph 2 </button>
                     <button id="reveal" onclick = "revealColoring()" style = "position:absolute; left:97%">Reveal</button>
                     <button id="turbo" onclick = "runTurbo()" style = "position: absolute; left:84%" >Turbo-Run</button>
-                </div>
-                    
-            </div>
-                
+                </div>       
+            </div>     
         </div>
             
-            
-
-        <div id = "footer" style = "font-size: 17px; padding-bottom: 100px">
+        <div id = "footer" style = "font-size: 15px; padding-bottom: 100px">
             <div id = "details" style="padding-bottom: 40px;">
                 There are a few steps to remember in order to conceptualize the proof.
                 <ol>
